@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contador y árbol animado</title>
+  <title>Contador de nuestro amor</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,7 +11,6 @@
       color: #a3185e;
       text-align: center;
       padding: 40px 20px;
-      overflow: hidden;
       animation: fadeIn 2s ease-in;
     }
 
@@ -26,84 +25,19 @@
       margin-bottom: 40px;
     }
 
+    #arbol-imagen {
+      max-width: 250px;
+      margin: 20px auto;
+    }
+
     #frase {
       font-size: 1.2rem;
-      margin-top: 40px;
+      margin-top: 30px;
       color: #9c2653;
-      max-width: 400px;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    /* Árbol */
-    #arbol {
-      margin: 0 auto;
-      width: 100px;
-      height: 180px;
-      position: relative;
-    }
-
-    #tronco {
-      width: 20px;
-      height: 0;
-      background-color: #6b4f31;
-      margin: 0 auto;
-      border-radius: 5px;
-      animation: crecerTronco 3s forwards;
-      transform-origin: bottom center;
-    }
-
-    #copa {
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%) scale(0);
-      width: 130px;
-      height: 130px;
-      background: radial-gradient(circle at center, #48a14d 40%, #2c6b28 90%);
-      border-radius: 50%;
-      animation: florecer 3s forwards;
-      animation-delay: 3s;
-    }
-
-    /* Hojas cayendo */
-    .hoja {
-      position: absolute;
-      top: -20px;
-      width: 15px;
-      height: 15px;
-      background: #58b03e;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: caer 6s linear infinite;
-    }
-
-    @keyframes caer {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Animaciones */
-    @keyframes crecerTronco {
-      from { height: 0; }
-      to { height: 120px; }
-    }
-
-    @keyframes florecer {
-      from {
-        transform: translateX(-50%) scale(0);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(-50%) scale(1);
-        opacity: 1;
-      }
+      line-height: 1.6;
     }
 
     @keyframes fadeIn {
@@ -117,28 +51,16 @@
   <h1>Nuestra historia comenzó hace...</h1>
   <div id="contador">Cargando...</div>
 
-  <div id="arbol">
-    <div id="tronco"></div>
-    <div id="copa"></div>
-  </div>
+  <!-- Imagen de árbol -->
+  <img id="arbol-imagen" src="https://cdn.pixabay.com/photo/2020/10/26/10/07/tree-5687723_1280.png" alt="Árbol del amor" />
 
+  <!-- Frase romántica -->
   <div id="frase">
-    Como este árbol que crece fuerte y lleno de vida, así florece nuestro amor cada día.
+    Como las raíces de este árbol, nuestro amor se sostiene con fuerza, y como sus ramas, sigue creciendo hacia el cielo sin límites.
   </div>
 
-  <!-- Hojas cayendo -->
   <script>
-    // Crear hojas animadas
-    for (let i = 0; i < 25; i++) {
-      const hoja = document.createElement("div");
-      hoja.classList.add("hoja");
-      hoja.style.left = `${Math.random() * 100}%`;
-      hoja.style.animationDelay = `${Math.random() * 5}s`;
-      hoja.style.backgroundColor = Math.random() > 0.5 ? "#66bb6a" : "#81c784";
-      document.body.appendChild(hoja);
-    }
-
-    // Fecha de inicio (puedes cambiarla)
+    // Fecha de inicio (ajustable)
     const inicio = new Date();
     inicio.setDate(inicio.getDate() - 266);
 
