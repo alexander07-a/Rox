@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contador y árbol animado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      color: #a3185e;
+      text-align: center;
+      padding: 40px 20px;
+      overflow: hidden;
+      animation: fadeIn 2s ease-in;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+    }
+
+    #contador {
+      font-size: 1.4rem;
+      color: #4a148c;
+      margin-bottom: 40px;
+    }
+
+    #frase {
+      font-size: 1.2rem;
+      margin-top: 40px;
+      color: #9c2653;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Árbol */
+    #arbol {
+      margin: 0 auto;
+      width: 100px;
+      height: 180px;
+      position: relative;
+    }
+
+    #tronco {
+      width: 20px;
+      height: 0;
+      background-color: #6b4f31;
+      margin: 0 auto;
+      border-radius: 5px;
+      animation: crecerTronco 3s forwards;
+      transform-origin: bottom center;
+    }
+
+    #copa {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle at center, #48a14d 40%, #2c6b28 90%);
+      border-radius: 50%;
+      animation: florecer 3s forwards;
+      animation-delay: 3s;
+    }
+
+    /* Hojas cayendo */
+    .hoja {
+      position: absolute;
+      top: -20px;
+      width: 15px;
+      height: 15px;
+      background: #58b03e;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: caer 6s linear infinite;
+    }
+
+    @keyframes caer {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes crecerTronco {
+      from { height: 0; }
+      to { height: 120px; }
+    }
+
+    @keyframes florecer {
+      from {
+        transform: translateX(-50%) scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Nuestra historia comenzó hace...</h1>
+  <div id="contador">Cargando...</div>
+
+  <div id="arbol">
+    <div id="tronco"></div>
+    <div id="copa"></div>
+  </div>
+
+  <div id="frase">
+    Como este árbol que crece fuerte y lleno de vida, así florece nuestro amor cada día.
+  </div>
+
+  <!-- Hojas cayendo -->
+  <script>
+    // Crear hojas animadas
+    for (let i = 0; i < 25; i++) {
+      const hoja = document.createElement("div");
+      hoja.classList.add("hoja");
+      hoja.style.left = `${Math.random() * 100}%`;
+      hoja.style.animationDelay = `${Math.random() * 5}s`;
+      hoja.style.backgroundColor = Math.random() > 0.5 ? "#66bb6a" : "#81c784";
+      document.body.appendChild(hoja);
+    }
+
+    // Fecha de inicio (puedes cambiarla)
+    const inicio = new Date();
+    inicio.setDate(inicio.getDate() - 266);
+
+    const contador = document.getElementById('contador');
+
+    function actualizarContador() {
+      const ahora = new Date();
+      let diff = ahora - inicio;
+
+      let segundos = Math.floor(diff / 1000);
+      let minutos = Math.floor(segundos / 60);
+      let horas = Math.floor(minutos / 60);
+      let dias = Math.floor(horas / 24);
+
+      horas %= 24;
+      minutos %= 60;
+      segundos %= 60;
+
+      contador.textContent = `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+    }
+
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+  </script>
+
+</body>
+</html>
